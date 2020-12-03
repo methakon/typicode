@@ -77,6 +77,7 @@ class crud_tbl
                 .then((response) => response.json())
                 .then((json) => console.log(json));
              alert("Updated");
+              $('.check_operator').prop('checked', false);
 
          }
          else
