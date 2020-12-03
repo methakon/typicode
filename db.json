@@ -4,7 +4,28 @@
       "id": 1,
       "name": "swarna sekhar dhar",
       "email": "swarnasekhar.dhar@typicode.com"      
+    },
+    {
+      "id": 2,
+      "name": "sekhar dhar",
+      "email": "sekhar.dhar@typicode.com"      
+    },
+    {
+      "id": 3,
+      "name": "bapay dhar",
+      "email": "bapay.dhar@typicode.com"      
+    } ,
+    {
+      "id": 4,
+      "name": "hari das",
+      "email": "hari.dhar@typicode.com"      
+    } ,
+    {
+      "id": 5,
+      "name": "Giri dhar",
+      "email": "giri.dhar@typicode.com"      
     }
+    
   ],
   "profile": {
     "name": "typicode"
