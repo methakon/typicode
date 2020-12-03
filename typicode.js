@@ -11,7 +11,7 @@ class crud_tbl
          this.btn.add=document.getElementById('add_btn');
          this.btn.edit=document.getElementById('edit_btn');
          this.btn.save=document.getElementById('btn_save');
-         
+         this.btn.del=document.getElementById('del_btn');
          this.check.all=document.getElementById('all_selector');
          this.omodal=document.getElementById('add_edit_from');
          this.auther="SWARNA SEKHAR DHAR";
@@ -20,6 +20,19 @@ class crud_tbl
          $(this.btn.save ).on( "click", function() {
                   document.crud.save_user();
            });
+           $(this.btn.add ).on( "click", function() {
+                $("#entry_from")[0].reset() ;
+                $('#add_edit_from').modal('show');
+                $('.check_operator').prop('checked', false);
+                $(this.btn.edit).addClass("d-none");
+                 $(this.btn.del).addClass("d-none");
+                
+           });
+           $(this.btn.del ).on( "click", function() {
+                $("#entry_from")[0].reset() ;
+                document.crud.delete_record(); 
+           });
+           
      }
      initialise()
      {
@@ -27,6 +40,7 @@ class crud_tbl
          fetch('https://my-json-server.typicode.com/methakon/typicode/users')
          .then((response) => response.json())
          .then((json) => document.crud.list_table(json));
+        
      }
      list_table(data)
      {
@@ -38,6 +52,9 @@ class crud_tbl
                    $(document.crud.otable).children('tbody').append(row);
                   
               });
+               $('.check_operator').change(function() {
+                  document.crud.check_checks(this);
+                });
          }
           
      }
@@ -75,14 +92,60 @@ class crud_tbl
             },
           })
             .then((response) => response.json())
-            .then((json) => function(json){
-                console.log(json)
-          }) 
+            .then((json) => console.log(json)) 
             .then((json) => document.crud.initialise()) ; 
               alert("added");
          }
           
          $('#add_edit_from').modal('hide');
 
+     }
+     check_checks(elem)
+     {
+        var checked= this.otable.querySelectorAll('.check_operator:checked');
+        if(checked.length > 0){
+            
+             $(this.btn.del).removeClass("d-none");
+        }
+        else
+        {
+            $(this.btn.del).addClass("d-none");
+             
+        }
+        if(checked.length == 1){
+               
+            fetch('https://my-json-server.typicode.com/methakon/typicode/users/'+checked[0].value)
+            .then((response) => response.json())
+            .then((json) => document.crud.set_from(json));
+
+            
+                $(this.btn.edit).removeClass("d-none");
+            }
+            else
+            {
+                $(this.btn.edit).addClass("d-none");
+            }
+         
+     }
+     delete_record()
+     {
+          
+          var checked= this.otable.querySelectorAll('.check_operator:checked');
+          if(checked.length > 0){
+              checked.forEach(function(ent){
+                  fetch('https://my-json-server.typicode.com/methakon/typicode/users/'+ent.value, {
+                        method: 'DELETE',
+                    }) ;
+              });
+              $('.check_operator').prop('checked', false);
+          }
+         
+
+     }
+     set_from(data)
+     {    
+          entry_from.id.value =data.id;
+          entry_from.user_name.value =data.name;
+          entry_from.user_email.value =data.email;
      }
 }
