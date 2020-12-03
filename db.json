@@ -1,8 +1,9 @@
 {
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "title": "hello"
+      "name": "swarna sekhar dhar",
+      "email": "swarnasekhar.dhar@typicode.com"      
     }
   ],
   "profile": {
