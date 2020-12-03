@@ -20,11 +20,14 @@ and open the template in the editor.
                 <h2 class="pull-left col-md-8">Simple CRUD operations</h2>
                 <div class="col-md-4 float-right">
                    
-                    <button id="add_btn" class="btn btn-secondary ml-1  float-right" data-toggle="modal" data-target="#add_edit_from" >
+                    <button id="add_btn" class="btn btn-secondary ml-1  float-right"   >
                         <i class="glyphicon glyphicon-plus"></i>Add
                     </button>
-                     <button id="edit_btn" class="btn btn-secondary d-none ml-1 float-right" >
+                     <button id="edit_btn" class="btn btn-secondary d-none ml-1 float-right" data-toggle="modal" data-target="#add_edit_from" >
                         <i class="glyphicon glyphicon-pencil"></i>Edit
+                    </button>
+                     <button id="del_btn" class="btn btn-secondary d-none ml-1 float-right" >
+                        <i class="glyphicon glyphicon-pencil"></i>Delete users
                     </button>
                 </div>
             </div>
@@ -44,9 +47,7 @@ and open the template in the editor.
                    
                 </tbody>
                 <tfoot>
-                    <button id="del_btn" class="btn btn-secondary d-none ml-1 float-right" >
-                        <i class="glyphicon glyphicon-pencil"></i>Delete users
-                    </button>
+                   
                 </tfoot>
               </table>
             </div>
