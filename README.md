@@ -10,3 +10,9 @@ submit the form. On submit send POST request to API and also refresh the table d
 on edit load the same form with selected user information. On submit send PUT request
 5. And also implement Client side pagination
 For sample API, Please use https://jsonplaceholder.typicode.com/guide/
+
+
+solution :
+
+to run this code please execute index.html
+
