@@ -20,6 +20,12 @@ class crud_tbl
          $(this.btn.save ).on( "click", function() {
                   document.crud.save_user();
            });
+           $(this.btn.edit ).on( "click", function() {
+                var id = this.value;
+                fetch('https://my-json-server.typicode.com/methakon/typicode/users/'+id)
+                .then((response) => response.json())
+                .then((json) => document.crud.set_from(json));
+           });
            $(this.btn.add ).on( "click", function() {
                 $("#entry_from")[0].reset() ;
                 $('#add_edit_from').modal('show');
@@ -117,10 +123,8 @@ class crud_tbl
         }
         if(checked.length == 1){
                
-            fetch('https://my-json-server.typicode.com/methakon/typicode/users/'+checked[0].value)
-            .then((response) => response.json())
-            .then((json) => document.crud.set_from(json));
-
+            
+                this.btn.edit.value=checked[0].value;
             
                 $(this.btn.edit).removeClass("d-none");
             }
