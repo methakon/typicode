@@ -37,7 +37,9 @@ class crud_tbl
      initialise()
      {
          
-         fetch('https://my-json-server.typicode.com/methakon/typicode/users')
+         fetch('https://my-json-server.typicode.com/methakon/typicode/users',{
+                        method: 'GET',
+                    })
          .then((response) => response.json())
          .then((json) => document.crud.list_table(json));
         
@@ -76,14 +78,14 @@ class crud_tbl
               })
                 .then((response) => response.json())
                 .then((json) => console.log(json));
+             $('.check_operator').prop('checked', false);
              alert("Updated");
-              $('.check_operator').prop('checked', false);
 
          }
          else
          {
             fetch('https://my-json-server.typicode.com/methakon/typicode/users', {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
               name: entry_from.user_name.value,
               email: entry_from.user_email.value,
@@ -134,10 +136,14 @@ class crud_tbl
           var checked= this.otable.querySelectorAll('.check_operator:checked');
           if(checked.length > 0){
               checked.forEach(function(ent){
+                  var tr=ent.parentElement.parentElement;
                   fetch('https://my-json-server.typicode.com/methakon/typicode/users/'+ent.value, {
                         method: 'DELETE',
                     }) ;
+                  tr.remove(); 
               });
+              $(this.btn.edit).addClass("d-none");
+              $(this.btn.del).addClass("d-none");
               $('.check_operator').prop('checked', false);
           }
          
