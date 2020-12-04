@@ -30,8 +30,8 @@ class crud_tbl
                 $("#entry_from")[0].reset() ;
                 $('#add_edit_from').modal('show');
                 $('.check_operator').prop('checked', false);
-                $(this.btn.edit).addClass("d-none");
-                 $(this.btn.del).addClass("d-none");
+                $(document.crud.btn.edit).addClass("d-none");
+                $(document.crud.btn.del).addClass("d-none");
                 
            });
            $(this.btn.del ).on( "click", function() {
@@ -62,6 +62,7 @@ class crud_tbl
               });
                $('.check_operator').change(function() {
                   document.crud.check_checks(this);
+                  
                 });
          }
           
@@ -83,15 +84,16 @@ class crud_tbl
                 },
               })
                 .then((response) => response.json())
-                .then((json) => console.log(json));
+                .then((json) => document.crud.set_row(json));
              $('.check_operator').prop('checked', false);
-             alert("Updated");
+             
+             alert("Edited");
 
          }
          else
          {
             fetch('https://my-json-server.typicode.com/methakon/typicode/users', {
-            method: 'PUT',
+            method: 'POST',
             body: JSON.stringify({
               name: entry_from.user_name.value,
               email: entry_from.user_email.value,
@@ -101,8 +103,8 @@ class crud_tbl
             },
           })
             .then((response) => response.json())
-            .then((json) => console.log(json)) 
-            .then((json) => document.crud.initialise()) ; 
+            .then((json) => document.crud.add_row(json)) ;
+           // .then((json) => document.crud.initialise()) ; 
               alert("added");
          }
           
@@ -158,5 +160,17 @@ class crud_tbl
           entry_from.id.value =data.id;
           entry_from.user_name.value =data.name;
           entry_from.user_email.value =data.email;
+     }
+     set_row(row)
+     {
+      
+      var tr=  $(".check_operator[value='"+row.id+"']")[0].parentElement.parentElement; 
+      $(tr).html("<th scope='row'><input type='checkbox' class='check_operator' id='user_id' name='user_id[]' value='"+row.id +"' ></th><td>"+row.id +"</td><td>"+row.name +"</td><td>"+row.email +"</td>");
+     }
+     add_row(row)
+     {
+         $(document.crud.otable).children('tbody')
+              .append("<tr><th scope='row'><input type='checkbox' class='check_operator' id='user_id' name='user_id[]' value='"+row.id +"' ></th><td>"+row.id +"</td><td>"+row.name +"</td><td>"+row.email +"</td></tr>");
+       
      }
 }
